@@ -1,0 +1,17 @@
+VM_NAME=ma-c7-57-107
+MGMT_NET=type=direct,source=enp0s3,source_mode=bridge,model=virtio
+DISK=/home/images/vta-3.0.1-496.qcow2
+
+virt-install \
+--connect qemu:///system --hvm \
+--name=ma-c7-57-107 \
+--ram=4096 \
+--vcpus=2 \
+--os-type=linux --os-variant=rhel7 \
+--disk path=${DISK},device=disk,bus=virtio,format=qcow2,cache=none \
+--cpu host \
+--network ${MGMT_NET} \
+--graphics vnc,listen=0.0.0.0 --noautoconsole \
+--console pty,target_type=serial \
+--import
+
